@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+
+<body>
+    <% for(let key in list){ %> 
+        <label>
+            <%=key%></label>
+            <% if(Array.isArray(list[key])){ %>
+                <% let value1=list[key]; %>
+                <select>
+                    <% for(let item of value1 ){ %>
+                        <option>
+                            <%= item%>
+                        </option>
+                    <% }%>
+                </select>
+            <% } else { %>
+                <input type="text" value="<%= list[key]%>" />
+                <% } %>
+     <% } %>
+
+</body>
+
+</html>

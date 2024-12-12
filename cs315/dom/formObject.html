@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        // let form = {Name:'Ram',Age:30,Profession:'Developer'};
+
+        // let form = {Name:'Ram',Age:30,Profession:['Developer','Java']};
+
+        let form = { Name: 'Ram', Age: 30, Profession: { list: ['Developer', 'Tester','Analyst'], selected: 'Tester' } };
+
+        $(function () {
+            let div = $('<div></div>');
+            for (let key in form) {
+                let value= form[key];
+                let label = $('<label></label>');
+                label.html(key); 
+                div.append(label);
+                if (Array.isArray(value)) {
+                    let select = $('<select></select>');
+                    let html = '';
+                    for(let eachValue of value){
+                        html+= '<option>'+eachValue+"</option>"
+                    }
+                    select.html(html);
+                    div.append(select);
+                }
+                else if(typeof value=='object'){
+                    let select = $('<select></select>');
+                    let html = '';
+                    for(let eachValue of value.list){
+                        if(eachValue== value.selected)
+                            html+= '<option selected>'+eachValue+"</option>"
+                        else
+                            html+= '<option>'+eachValue+"</option>"
+                    }
+                    select.html(html);
+                    div.append(select);
+                }
+                else {
+                    let inputText = $('<input/>');
+                    inputText.attr('type', 'text');
+                    inputText.val(form[key]);
+                    
+                    div.append(inputText);
+                }
+                div.append($('br'));
+                div.append($('br'));
+            }
+            $('body').append(div)
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
